@@ -165,6 +165,7 @@ The ASCII layouts are meant to be copied into `src/data/maps/*.js` as they are (
 - This floor is the round base of the tower. You enter at the bottom (9–10, 14), and the **stairs up** `U` are at the top (9, 1).
 - **4 Shades** `z` and **4 Ash Knights** `k`. You can't sneak past all of them, so this floor tests whether your level is high enough.
 - The **chest** (9, 5) is inside the central pillar, which opens at (9, 6). It holds the **Spire Mail**.
+- **Sign:** a portrait of Corvin Ashe hangs on the wall at (10, 2), and you can read it from (10, 1) or (11, 2). It's a story clue (see [STORY.md](STORY.md)). Store it in this map's `signs: [{ x: 10, y: 2, scene: 'corvinPortrait' }]`.
 
 ### Zone 3: Ashen Spire, Floor 2 (`spire2`)
 

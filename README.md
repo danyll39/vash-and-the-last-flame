@@ -25,7 +25,7 @@ A small, finishable, turn-based fantasy RPG built with React and Vite. This is a
 
 - **Lanternhold** is a small village in a valley. A great lantern in the village square keeps monsters away, but it has started to flicker.
 - The light came from three **shrine flames**: one in the **Mosswood** (forest), one in the **Gloam Caves**, and one at the top of the **Ashen Spire** (ruined tower).
-- The **Hollow King** is a forgotten ruler who feeds on light, and he has been stealing the flames. His shades now roam the valley.
+- The **Hollow King** feeds on light, and he has been stealing the flames. His shades now roam the valley. *(Twist: he is Corvin Ashe, Lanternhold's first lamplighter, who hoarded the light out of fear of the dark. You free him at the end. The full story is in [STORY.md](STORY.md).)*
 - You play the lamplighter's apprentice. You take the old lamplighter's staff and set out to relight each shrine, and the village lantern brightens each time you do.
 
 **The original twist, Light:** Your skill resource is **Light**, not mana. Skills spend Light. Resting at a lit shrine refills it. Each shrine you relight also raises your maximum Light, so story progress shows up directly in your character's power.
@@ -36,6 +36,7 @@ A small, finishable, turn-based fantasy RPG built with React and Vite. This is a
 - **Bren:** the shopkeeper.
 - **Tamsin:** a farmer who gives a side quest.
 - **The Hollow King:** the final boss at the top of the Ashen Spire.
+- **Pip:** the player's fixed name. The cast's voices, every scene, and all NPC lines are in [STORY.md](STORY.md).
 
 ---
 
@@ -113,6 +114,7 @@ A quest is a data object `{ id, title, giver, status: 'locked'|'active'|'done', 
 - Sound effects and music (CC0 from Kenney or OpenGameArt)
 - Speed stat and turn order
 - Mobile on-screen D-pad
+- Let players choose their own name instead of "Pip"
 
 **Rule of thumb:** if a new idea needs a new system, it goes to "Someday." If it only needs new data, such as one more enemy or item, it's fine to add.
 
