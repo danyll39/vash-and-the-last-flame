@@ -16,7 +16,7 @@ The map letters match [MAPS.md](MAPS.md).
 | Light | 5 | +1, plus +2 per shrine lit | 8 | 13 | 18 |
 
 - **XP to reach level N:** `10 × N × (N − 1)`, so 20 for Lv 2, 120 for Lv 4, 420 for Lv 7, and 900 for Lv 10. This follows from the README's rule of `level × 20` XP per level.
-- **Expected gear:** in Mosswood, the Staff (+2 ATK) and Cloth Coat (+1 DEF). In the caves, the Iron Sword (+5) and Leather Vest (+3). In the Spire, the Emberblade (+9) and Spire Mail (+6).
+- **Expected gear:** in Mosswood, the Staff (+2 ATK) and Cloth Coat (+1 DEF). In the caves, the Iron Sword (+5, bought from Bren) and Leather Vest (+3, the *Pest Control* reward). In the Spire, the Emberblade (+9) and Spire Mail (+6).
 - **Damage:** `max(1, ATK + weapon − (DEF + armor) + random(−2..2))`, which uses the same formula for both sides.
 - **Skills:** Flare deals 1.5× damage. Mend heals 30% of max HP. Radiance deals normal Attack damage to every enemy.
 

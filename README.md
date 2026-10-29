@@ -76,13 +76,13 @@ A small, finishable, turn-based fantasy RPG built with React and Vite. This is a
 - XP needed for the next level is `level * 20`, and the level cap is **10**.
 - Each level-up adds +8 HP, +2 ATK, +1 DEF, and +1 Light, then fully heals you.
 
-### Items (about 12 total)
+### Items (12 total; prices, shop stock, and the gold check are in [ITEMS.md](ITEMS.md))
 | Type | Examples |
 |---|---|
-| Consumables | Herb (+20 HP), Tonic (+50 HP), Wick Oil (+5 Light), Smoke Bomb (guaranteed flee) |
-| Weapons | Lamplighter's Staff (+2), Iron Sword (+5), Emberblade (+9, dropped by the Pale Crawler) |
+| Consumables | Herb (+20 HP), Tonic (+50 HP), Wick Oil (+5 Light), Smoke Bomb (guaranteed flee), Elixir (full HP and Light) |
+| Weapons | Lamplighter's Staff (+2), Iron Sword (+5, bought from Bren), Emberblade (+9, dropped by the Pale Crawler) |
 | Armor | Cloth Coat (+1), Leather Vest (+3), Spire Mail (+6) |
-| Key items | Shrine Key fragments, Tamsin's Locket |
+| Key items | Tamsin's Locket |
 
 Each item is a plain data object, for example `{ id, name, type, value, price, description }`. There's one weapon slot and one armor slot, and the inventory is a simple list.
 
@@ -90,8 +90,8 @@ Each item is a plain data object, for example `{ id, name, type, value, price, d
 1. **Relight the Mosswood Shrine** (main): beat the mini-boss *Thornback Boar*.
 2. **Relight the Gloam Shrine** (main): beat *the Pale Crawler*.
 3. **Relight the Spire Shrine** (main): beat **the Hollow King**, then the credits roll.
-4. **Lost Locket** (side, Tamsin): find a chest in the caves. Reward: Tonic ×3 and gold.
-5. **Pest Control** (side, Bren): defeat 5 Mosswood slimes. Reward: a shop discount and a Leather Vest.
+4. **Lost Locket** (side, Tamsin): find a chest in the caves. Reward: Tonic ×3 and 50 gold.
+5. **Pest Control** (side, Bren): defeat 5 Mosswood slimes. Reward: 20% off everything in the shop, plus a Leather Vest.
 
 A quest is a data object `{ id, title, giver, status: 'locked'|'active'|'done', goal: { type: 'defeat'|'collect'|'flag', target, count } }`, and game events update its progress.
 

@@ -139,7 +139,7 @@ The ASCII layouts are meant to be copied into `src/data/maps/*.js` as they are (
 - This map is a winding maze. You enter at the bottom (9–10, 14), and the shrine is in the far top-left corner, so you have to explore to reach it.
 - **5 Cave Bats** `b` and **3 Stone Beetles** `r`.
 - **Tamsin's Locket** is in the chest at (4, 7), inside a side room you enter from below at (4, 9).
-- The second **chest** (16, 2) holds an Iron Sword, as a reward for exploring.
+- The second **chest** (16, 2) holds 60 gold and a Tonic, as a reward for exploring.
 - The **Pale Crawler** `M` (3, 2) guards **Shrine 2** `S` at (1, 1). Relighting it also unlocks the **Radiance** skill.
 
 ### Zone 3: Ashen Spire, Floor 1 (`spire1`)
