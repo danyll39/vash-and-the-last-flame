@@ -37,18 +37,6 @@ button {
   font: inherit;
 }
 
-/* Temporary screen shown after Start until the world map exists (M1). */
-.placeholder {
-  min-height: 100%;
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 24px;
-  padding: 16px;
-  font-size: 0.75rem;
-  text-align: center;
-}
-
 :focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 4px;

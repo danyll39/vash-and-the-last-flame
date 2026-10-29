@@ -1,0 +1,116 @@
+.screen {
+  /* 16 px tiles drawn at 3× (48 px), shrinking to fit narrow screens. */
+  --tile: min(48px, calc((100vw - 32px) / 20));
+
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.mapName {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--glow);
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.55rem;
+  line-height: 1.8;
+  color: var(--ink-dim);
+  text-align: center;
+}
+
+.viewport {
+  position: relative;
+  width: calc(var(--map-w) * var(--tile));
+  height: calc(var(--map-h) * var(--tile));
+  border: 4px solid var(--brass);
+  box-shadow: 6px 6px 0 #000;
+  box-sizing: content-box;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--map-w), var(--tile));
+  grid-auto-rows: var(--tile);
+}
+
+.cell {
+  position: relative;
+}
+
+.cell > * {
+  position: absolute;
+  inset: 0;
+}
+
+.sprite {
+  display: block;
+  width: var(--tile);
+  height: var(--tile);
+  background-repeat: no-repeat;
+  background-size: calc(var(--tile) * 12) calc(var(--tile) * 11);
+  background-position: calc(var(--col) * var(--tile) * -1)
+    calc(var(--row) * var(--tile) * -1);
+  image-rendering: pixelated;
+}
+
+.flip {
+  transform: scaleX(-1);
+}
+
+.water {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 calc(var(--tile) / 4),
+      rgb(255 255 255 / 0.18) calc(var(--tile) / 4) calc(var(--tile) / 4 + 3px)
+    ),
+    #3c78b5;
+}
+
+.fog {
+  /* Swirls of purple haze over the grass, so it reads as fog rather than a hole. */
+  background:
+    radial-gradient(circle at 30% 35%, rgb(150 120 190 / 0.55), transparent 55%),
+    radial-gradient(circle at 70% 70%, rgb(120 90 170 / 0.5), transparent 60%),
+    rgb(55 35 85 / 0.7);
+  animation: drift 4s ease-in-out infinite alternate;
+}
+
+/* NPCs, chests and the player sit on top of the grid. */
+.entity {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(
+    calc(var(--x) * var(--tile)),
+    calc(var(--y) * var(--tile))
+  );
+}
+
+.player {
+  transition: transform 110ms linear;
+  z-index: 1;
+}
+
+@keyframes drift {
+  to {
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player {
+    transition: none;
+  }
+  .fog {
+    animation: none;
+  }
+}

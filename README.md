@@ -2,7 +2,7 @@
 
 A small, finishable, turn-based fantasy RPG built with React and Vite. This is a portfolio piece by Ursala Lindsey.
 
-> **Status:** M0 done. The project is set up and has a title screen. Next up is M1 (tile map and movement). Work through the milestones below in order and check off each item as you finish it.
+> **Status:** M1 done. You can walk around Candlebrook, and walls, water, houses, fog and NPCs block you. Next up is M2 (warps, NPCs, dialogue). Work through the milestones below in order and check off each item as you finish it.
 
 ## Getting started
 
@@ -202,18 +202,20 @@ Each milestone should leave you with something runnable. Commit at the end of ea
 ### M0: Project setup (½ day)
 - [x] `npm create vite@latest lanternhold-rpg -- --template react`
 - [x] Add Vitest (with Testing Library and jsdom), oxlint (the template's linter, used instead of ESLint), and Prettier
-- [ ] Download Kenney *Tiny Dungeon* and *Tiny Town* into `public/assets/`, keeping the license files (needed from M1 on)
+- [x] Download Kenney *Tiny Dungeon* and *Tiny Town* into `public/assets/`, keeping the license files
 - [x] Create a GitHub repo, then push
 - **Done when:** `npm run dev` shows a "Vash and the Last Flame" title screen with a Start button.
 
 ### M1: Tile map and movement (1–2 days)
-- [ ] `TileMap` renders the village map from a 2D array, with sprites drawn from the sheet
-- [ ] `useKeyboard` hook, plus a `MOVE` action in the reducer
-- [ ] `movement.js`: `canMoveTo(map, x, y)` checks blocked tiles (unit-tested)
-- [ ] The player sprite faces the direction it's moving
+- [x] `TileMap` renders the village map from a 2D array, with sprites drawn from the sheet (sprite choices live in `src/data/tilesets.js`)
+- [x] `useKeyboard` hook, plus a `MOVE` action in the reducer
+- [x] `movement.js`: `canMoveTo(map, x, y)` checks blocked tiles (unit-tested)
+- [x] The player sprite faces the direction it's moving. The Kenney characters have only one pose, so facing left mirrors the sprite.
+- Notes: neither Kenney pack has water, so water and fog are drawn with CSS. `parseMap` (planned for M2) was built early, because the map needs it to draw NPCs.
 - **Done when:** you can walk around the village and you can't walk through walls.
 
 ### M2: Maps, warps, NPCs, and dialogue (2 days)
+- [x] `parseMap` turns map letters into objects (done in M1)
 - [ ] Warp tiles move you between the village and Mosswood
 - [ ] NPC tiles and an `INTERACT` action show a `DialogueBox` (Space advances, and movement is locked while it's open)
 - [ ] Chests give an item once (tracked in `openedChests`)

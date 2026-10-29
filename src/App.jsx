@@ -1,23 +1,21 @@
-import { useState } from 'react'
 import TitleScreen from './components/ui/TitleScreen.jsx'
+import WorldScreen from './components/world/WorldScreen.jsx'
+import { GameProvider, useGame } from './state/GameContext.jsx'
 
-// Screens: 'title' | 'world' (later: 'battle' | 'gameover' | 'credits').
-// This moves into gameReducer in M1.
+function Screens() {
+  const { state, dispatch } = useGame()
+
+  if (state.screen === 'world') return <WorldScreen />
+
+  return <TitleScreen onStart={() => dispatch({ type: 'START_GAME' })} />
+}
+
 function App() {
-  const [screen, setScreen] = useState('title')
-
-  if (screen === 'world') {
-    return (
-      <main className="placeholder">
-        <p>The world map arrives in Milestone 1.</p>
-        <button type="button" onClick={() => setScreen('title')}>
-          Back to title
-        </button>
-      </main>
-    )
-  }
-
-  return <TitleScreen onStart={() => setScreen('world')} />
+  return (
+    <GameProvider>
+      <Screens />
+    </GameProvider>
+  )
 }
 
 export default App
