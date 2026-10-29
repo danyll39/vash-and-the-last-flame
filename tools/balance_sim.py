@@ -1,4 +1,4 @@
-# Lanternhold balance simulation: plays the whole game many times with a simple AI.
+# Vash and the Last Flame balance simulation: plays the whole game many times with a simple AI.
 # Keep the numbers in E, GROUP and ZONES in sync with ENEMIES.md, then run: python3 tools/balance_sim.py
 import random, statistics as st
 R=random.Random(1)

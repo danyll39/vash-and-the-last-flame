@@ -19,7 +19,11 @@ function TitleScreen({ onStart }) {
         <span className={styles.base} />
       </div>
 
-      <h1 className={styles.title}>Lanternhold</h1>
+      <h1 className={styles.title}>
+        <span className={styles.titleMain}>Vash</span>{' '}
+        <span className={styles.titleJoin}>and the</span>{' '}
+        <span className={styles.titleMain}>Last Flame</span>
+      </h1>
       <p className={styles.tagline}>
         Relight the valley before the dark takes it.
       </p>

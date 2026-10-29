@@ -1,4 +1,4 @@
-# Lanternhold: Items, Shop, and Gold
+# Vash and the Last Flame: Items, Shop, and Gold
 
 This file lists all 12 items with their effects and prices, where to find each one, what Bren sells at each point in the story, and a check that gold income matches prices. Enemy drops and gold rewards come from [ENEMIES.md](ENEMIES.md), and chest locations come from [MAPS.md](MAPS.md).
 
@@ -85,7 +85,7 @@ And this is a typical spending plan:
 |---|---|---|---|
 | End of Mosswood (after *Pest Control*) | Iron Sword at the friend's price | 72 | ~37, enough for a few Herbs |
 | Gloam Caves | about 6 Tonics | ~120 | ~200 |
-| Before the Hollow King | 2 Elixirs + 4 Tonics | ~272 | ~90 |
+| Before the Lightless King | 2 Elixirs + 4 Tonics | ~272 | ~90 |
 
 - **Result:** the must-have purchase, the Iron Sword before the caves, is affordable after one Mosswood clear, but only if the player does *Pest Control* first. That gives the side quest a real purpose. By the end, players have a small cushion of gold that covers one defeat without being left broke.
 - **If playtesters end with lots of unspent gold,** raise the Elixir price before changing any enemy numbers. It's the one luxury item, so it's the easiest gold sink to adjust.

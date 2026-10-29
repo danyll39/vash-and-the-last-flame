@@ -1,4 +1,4 @@
-# Lanternhold: Project Plan
+# Vash and the Last Flame: Project Plan
 
 A small, finishable, turn-based fantasy RPG built with React and Vite. This is a portfolio piece by Ursala Lindsey.
 
@@ -32,11 +32,11 @@ npm run build      # production build in dist/
 
 ## 2. Core idea and setting
 
-**Pitch:** *The lantern that protects your village is going out. Relight the three shrine flames before the Hollow King swallows the valley in darkness.*
+**Pitch:** *The lantern that protects your village is going out. Relight the three shrine flames before the Lightless King swallows the valley in darkness.*
 
-- **Lanternhold** is a small village in a valley. A great lantern in the village square keeps monsters away, but it has started to flicker.
+- **Candlebrook** is a small village in a valley. A great lantern in the village square keeps monsters away, but it has started to flicker.
 - The light came from three **shrine flames**: one in the **Mosswood** (forest), one in the **Gloam Caves**, and one at the top of the **Ashen Spire** (ruined tower).
-- The **Hollow King** feeds on light, and he has been stealing the flames. His shades now roam the valley. *(Twist: he is Corvin Ashe, Lanternhold's first lamplighter, who hoarded the light out of fear of the dark. You free him at the end. The full story is in [STORY.md](STORY.md).)*
+- The **Lightless King** feeds on light, and he has been stealing the flames. His shades now roam the valley. *(Twist: he is Corvin Ashe, Candlebrook's first lamplighter, who hoarded the light out of fear of the dark. You free him at the end. The full story is in [STORY.md](STORY.md).)*
 - You play the lamplighter's apprentice. You take the old lamplighter's staff and set out to relight each shrine, and the village lantern brightens each time you do.
 
 **The original twist, Light:** Your skill resource is **Light**, not mana. Skills spend Light. Resting at a lit shrine refills it. Each shrine you relight also raises your maximum Light, so story progress shows up directly in your character's power.
@@ -46,8 +46,8 @@ npm run build      # production build in dist/
 - **Old Wick:** the lamplighter, who gives the main quests.
 - **Bren:** the shopkeeper.
 - **Tamsin:** a farmer who gives a side quest.
-- **The Hollow King:** the final boss at the top of the Ashen Spire.
-- **Pip:** the player's fixed name. The cast's voices, every scene, and all NPC lines are in [STORY.md](STORY.md).
+- **The Lightless King:** the final boss at the top of the Ashen Spire.
+- **Vash:** the player's fixed name. The cast's voices, every scene, and all NPC lines are in [STORY.md](STORY.md).
 
 ---
 
@@ -101,7 +101,7 @@ Each item is a plain data object, for example `{ id, name, type, value, price, d
 ### Quests (3 main + 2 side)
 1. **Relight the Mosswood Shrine** (main): beat the mini-boss *Thornback Boar*.
 2. **Relight the Gloam Shrine** (main): beat *the Pale Crawler*.
-3. **Relight the Spire Shrine** (main): beat **the Hollow King**, then the credits roll.
+3. **Relight the Spire Shrine** (main): beat **the Lightless King**, then the credits roll.
 4. **Lost Locket** (side, Tamsin): find a chest in the caves. Reward: Tonic ×3 and 50 gold.
 5. **Pest Control** (side, Bren): defeat 5 Mosswood slimes. Reward: 20% off everything in the shop, plus a Leather Vest.
 
@@ -125,7 +125,7 @@ A quest is a data object `{ id, title, giver, status: 'locked'|'active'|'done', 
 - Sound effects and music (CC0 from Kenney or OpenGameArt)
 - Speed stat and turn order
 - Mobile on-screen D-pad
-- Let players choose their own name instead of "Pip"
+- Let players choose their own name instead of "Vash"
 
 **Rule of thumb:** if a new idea needs a new system, it goes to "Someday." If it only needs new data, such as one more enemy or item, it's fine to add.
 
@@ -204,7 +204,7 @@ Each milestone should leave you with something runnable. Commit at the end of ea
 - [x] Add Vitest (with Testing Library and jsdom), oxlint (the template's linter, used instead of ESLint), and Prettier
 - [ ] Download Kenney *Tiny Dungeon* and *Tiny Town* into `public/assets/`, keeping the license files (needed from M1 on)
 - [x] Create a GitHub repo, then push
-- **Done when:** `npm run dev` shows a "Lanternhold" title screen with a Start button.
+- **Done when:** `npm run dev` shows a "Vash and the Last Flame" title screen with a Start button.
 
 ### M1: Tile map and movement (1–2 days)
 - [ ] `TileMap` renders the village map from a 2D array, with sprites drawn from the sheet
@@ -252,7 +252,7 @@ Each milestone should leave you with something runnable. Commit at the end of ea
 - [ ] Build the Mosswood shrine, the Gloam Caves, and the Ashen Spire (2 floors)
 - [ ] All 6 enemies and 2 mini-bosses, each with one special move (for example, Boar charges up: "The boar paws the ground…")
 - [ ] Shrine relight event: refills Light, raises max Light, unlocks the next zone, and brightens the village lantern sprite
-- [ ] Hollow King fight with 2 phases (at 50% HP he summons shades)
+- [ ] Lightless King fight with 2 phases (at 50% HP he summons shades)
 - [ ] Credits screen
 - **Done when:** you can play the whole game from start to credits.
 

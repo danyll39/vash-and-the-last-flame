@@ -1,6 +1,6 @@
-# Lanternhold: Story and Dialogue
+# Vash and the Last Flame: Story and Dialogue
 
-This file has the full story outline, the cast, every scripted scene, NPC dialogue for each point in the story, quest log text, and the system messages. **Tone:** warm, with light humor. The village is cozy and a little silly, but the dark is real. **Twist:** the Hollow King is Lanternhold's first lamplighter, and you free him rather than destroy him.
+This file has the full story outline, the cast, every scripted scene, NPC dialogue for each point in the story, quest log text, and the system messages. **Tone:** warm, with light humor. The village is cozy and a little silly, but the dark is real. **Twist:** the Lightless King is Candlebrook's first lamplighter, and you free him rather than destroy him.
 
 Map locations come from [MAPS.md](MAPS.md), boss fights from [ENEMIES.md](ENEMIES.md), and rewards from [ITEMS.md](ITEMS.md).
 
@@ -8,7 +8,7 @@ Map locations come from [MAPS.md](MAPS.md), boss fights from [ENEMIES.md](ENEMIE
 
 ## 1. Story in one paragraph
 
-A hundred years ago, **Corvin Ashe**, Lanternhold's first lamplighter, built the great lantern and the three shrines that feed it. He was afraid of the dark his whole life. When he grew old, he climbed the Ashen Spire to keep the light safe forever, and he took it for himself. The hoarded light hollowed him out until he became **the Hollow King**, and now he is pulling the last of the valley's light up into his tower. You are **Pip**, apprentice to the current lamplighter, Old Wick. You carry the *Lamplighter's Staff*, which belonged to Corvin, though nobody remembers that. You relight each shrine. At each one you find part of Corvin's story carved into the stone. At the top of the Spire you break his crown, give the light back, and the frightened old man asks for one thing: to keep the dark away instead of hiding from it. His flame becomes the village lantern's light.
+A hundred years ago, **Corvin Ashe**, Candlebrook's first lamplighter, built the great lantern and the three shrines that feed it. He was afraid of the dark his whole life. When he grew old, he climbed the Ashen Spire to keep the light safe forever, and he took it for himself. The hoarded light ate away at him until he became **the Lightless King**, and now he is pulling the last of the valley's light up into his tower. You are **Vash**, apprentice to the current lamplighter, Old Wick. You carry the *Lamplighter's Staff*, which belonged to Corvin, though nobody remembers that. You relight each shrine. At each one you find part of Corvin's story carved into the stone. At the top of the Spire you break his crown, give the light back, and the frightened old man asks for one thing: to keep the dark away instead of hiding from it. His flame becomes the village lantern's light.
 
 ---
 
@@ -16,13 +16,13 @@ A hundred years ago, **Corvin Ashe**, Lanternhold's first lamplighter, built the
 
 | Character | Role | Voice | Sample line |
 |---|---|---|---|
-| **Pip** (player) | Apprentice lamplighter | Silent. Their actions do the talking. | — |
-| **Old Wick** | Lamplighter, gives the main quests | Gruff, but obviously fond of Pip. Makes terrible candle puns and refuses to admit they're puns. | *"Don't look at me like that. Wick is a perfectly normal name."* |
+| **Vash** (player) | Apprentice lamplighter | Silent. Their actions do the talking. | — |
+| **Old Wick** | Lamplighter, gives the main quests | Gruff, but obviously fond of Vash. Makes terrible candle puns and refuses to admit they're puns. | *"Don't look at me like that. Wick is a perfectly normal name."* |
 | **Bren** | Shopkeeper | A cheerful salesperson who turns every crisis into a sales pitch. | *"End of the world? Then you'll want Herbs. Bulk discount!"* |
 | **Tamsin** | Farmer, gives *Lost Locket* | A nervous worrier. She talks to her goat, Duchess, more than to people. | *"Duchess thinks I'm overreacting. Duchess eats fences."* |
-| **The Hollow King / Corvin Ashe** | Final boss | Cold and grand while he's the King. Small and scared once he's Corvin again. | *"Every light goes out, little lamplighter. I simply got there first."* |
+| **The Lightless King / Corvin Ashe** | Final boss | Cold and grand while he's the King. Small and scared once he's Corvin again. | *"Every light goes out, little lamplighter. I simply got there first."* |
 
-**Pip's name:** the name is fixed as "Pip" in version 1, so you don't need a name-entry screen. Letting players choose a name can go on the README's "Someday" list.
+**Vash's name:** the name is fixed as "Vash" in version 1, so you don't need a name-entry screen. Letting players choose a name can go on the README's "Someday" list.
 
 ---
 
@@ -38,7 +38,7 @@ Each beat sets a flag in `world.flags`. Dialogue and quests check these flags.
 | 3 | Defeat the Pale Crawler and relight Shrine 2 | Gloam Caves | `shrine2Lit` |
 | 4 | The west fog burns away | Village | (set by flag 3) |
 | 5 | Climb the Spire. A warning plays before the boss | Spire Floor 2 | `kingMet` |
-| 6 | Defeat the Hollow King, free Corvin, and relight Shrine 3 | Spire Floor 2 | `kingDefeated`, `shrine3Lit` |
+| 6 | Defeat the Lightless King, free Corvin, and relight Shrine 3 | Spire Floor 2 | `kingDefeated`, `shrine3Lit` |
 | 7 | **Ending:** Corvin's flame lights the village lantern, then the credits | Village (cutscene) | `gameComplete` |
 
 **Seeding the twist:** each shrine carving reveals part of Corvin's story, so the reveal at the end feels earned rather than random.
@@ -49,7 +49,7 @@ Each beat sets a flag in `world.flags`. Dialogue and quests check these flags.
 | Shrine 1 carving | "C.A. lit the first flame here, so the forest need never fear the night." |
 | Shrine 2 carving | "C.A. lit the second flame and could not sleep. What if they all go out?" |
 | Spire Floor 1 | A faded painting on the wall shows a man holding *your staff*. |
-| Hollow King, before the fight | "That staff… I know that staff." |
+| Lightless King, before the fight | "That staff… I know that staff." |
 
 ---
 
@@ -59,7 +59,7 @@ Each scene is a list of `{ speaker, text }` boxes. **Space** goes to the next bo
 
 ### Opening: "The Flicker" (new game, village square)
 1. *Night. The great lantern sputters, and shadows creep across the square.*
-2. **Wick:** Pip! Up, up. The lantern's been coughing all evening.
+2. **Wick:** Vash! Up, up. The lantern's been coughing all evening.
 3. **Wick:** That's not a figure of speech. Listen. *(The lantern coughs.)*
 4. **Wick:** The three shrine flames feed it, and someone's been stealing them. Shades on the roads, too.
 5. **Wick:** I'm too old to go tramping through forests. You're not. Take this.
@@ -96,17 +96,17 @@ Each scene is a list of `{ speaker, text }` boxes. **Space** goes to the next bo
 
 To make this work, add the painting as an interactable on the wall tile at (10, 2), just below the stair landing. You can read it from (10, 1) or (11, 2). In MAPS.md this is a plain `#` tile, so each map gets a small `signs` list: `{ x, y, scene }`.
 
-### Before the Hollow King (bump into him)
+### Before the Lightless King (bump into him)
 1. *The air grows cold. Every candle in the room leans toward the throne.*
-2. **Hollow King:** Another lamplighter. They always send a lamplighter.
-3. **Hollow King:** That staff… I know that staff.
-4. **Hollow King:** Every light goes out, little lamplighter. I simply got there first.
+2. **Lightless King:** Another lamplighter. They always send a lamplighter.
+3. **Lightless King:** That staff… I know that staff.
+4. **Lightless King:** Every light goes out, little lamplighter. I simply got there first.
 5. *The air grows cold. Continue?* **[Yes] / [Not yet]**
 
 → Sets `kingMet`. Choosing *Not yet* steps you back one tile. Next time, the scene skips straight to box 5.
 
 ### Phase 2 starts (King drops to 50% HP)
-1. **Hollow King:** No. NO. It's *mine*. If I let go, it all goes dark!
+1. **Lightless King:** No. NO. It's *mine*. If I let go, it all goes dark!
 2. *Darkness pours from his crown.*
 
 ### After the fight: "Corvin"
@@ -120,7 +120,7 @@ To make this work, add the painting as an interactable on the wall tile at (10, 
 
 → Sets `kingDefeated` and `shrine3Lit`, then fades to the ending.
 
-### Ending: "Lanternhold" (village square)
+### Ending: "Candlebrook" (village square)
 1. *Morning. The great lantern is burning brighter than anyone can remember.*
 2. **Wick:** Well. You did it. And you brought back… is that *Corvin Ashe*? In the lantern?
 3. **Wick:** I always said that lantern had a personality.
@@ -195,7 +195,7 @@ When you talk to Wick while a main quest is active and its shrine is lit, he tur
 | Open an empty chest | *Empty. You already got this one.* |
 | Pack full | *Your pack is full. Sold for {gold} gold.* |
 | Rest at a lit shrine | *The flame warms you. HP and Light restored.* |
-| Level up | *Pip reached level {n}!* followed by the stat increases |
+| Level up | *Vash reached level {n}!* followed by the stat increases |
 | Battle won | *Victory! {xp} XP, {gold} gold.* |
 | Battle lost | *Everything goes dark…* then *You wake up in the village. Wick is frowning. Half your gold is gone.* |
 | Flee succeeds / fails | *You got away!* / *Couldn't escape!* |
@@ -207,7 +207,7 @@ When you talk to Wick while a main quest is active and its shrine is lit, he tur
 ## 8. Credits
 
 ```
-LANTERNHOLD
+VASH AND THE LAST FLAME
 
 Design & Code ........ Ursala Lindsey
 Art .................. Kenney (kenney.nl), CC0
@@ -245,7 +245,7 @@ export const NPC_DIALOGUE = {
 export const SCENES = {
   opening: [
     { text: 'Night. The great lantern sputters, and shadows creep across the square.' },
-    { speaker: 'Wick', text: 'Pip! Up, up. The lantern\'s been coughing all evening.' },
+    { speaker: 'Wick', text: 'Vash! Up, up. The lantern\'s been coughing all evening.' },
     // ...
   ],
 };

@@ -8,7 +8,7 @@ describe('TitleScreen', () => {
   it('shows the game title', () => {
     render(<TitleScreen onStart={() => {}} />)
     expect(
-      screen.getByRole('heading', { name: 'Lanternhold' }),
+      screen.getByRole('heading', { name: 'Vash and the Last Flame' }),
     ).toBeInTheDocument()
   })
 
@@ -31,7 +31,7 @@ describe('App', () => {
     render(<App />)
     await userEvent.click(screen.getByRole('button', { name: 'Start' }))
     expect(
-      screen.queryByRole('heading', { name: 'Lanternhold' }),
+      screen.queryByRole('heading', { name: 'Vash and the Last Flame' }),
     ).not.toBeInTheDocument()
     expect(screen.getByText(/Milestone 1/)).toBeInTheDocument()
   })

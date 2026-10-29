@@ -1,4 +1,4 @@
-# Lanternhold: Enemies and Bosses
+# Vash and the Last Flame: Enemies and Bosses
 
 This file covers every enemy in the game: stats, special moves, rewards, and boss phases. The numbers are tuned against the player stat curve below and checked with a battle simulation ([tools/balance_sim.py](tools/balance_sim.py)). Section 6 has the results.
 
@@ -68,7 +68,7 @@ The map letters match [MAPS.md](MAPS.md).
 
 ---
 
-## 4. Final boss: The Hollow King (Ashen Spire Floor 2, `K`)
+## 4. Final boss: The Lightless King (Ashen Spire Floor 2, `K`)
 
 | HP | ATK | DEF | XP | Gold |
 |---|---|---|---|---|
@@ -120,7 +120,7 @@ export const ENEMIES = {
 };
 ```
 
-The Hollow King gets a `phases` array (`[{ untilHpPct: 50, ... }, { ... }]`) and a little custom code in `combat.js`. Don't try to make him fit the generic special-move system.
+The Lightless King gets a `phases` array (`[{ untilHpPct: 50, ... }, { ... }]`) and a little custom code in `combat.js`. Don't try to make him fit the generic special-move system.
 
 **Unit tests to write:** cycle timing, where turn 2 warns and turn 3 hits for 2×. Fade halving only plain Attacks. Web skipping exactly one player turn. The King's summon happening once, at the 50% mark.
 

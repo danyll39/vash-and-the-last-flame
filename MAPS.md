@@ -1,4 +1,4 @@
-# Lanternhold: World and Map Design
+# Vash and the Last Flame: World and Map Design
 
 This file shows how the areas connect and gives a tile layout for each of the 5 maps. Every map is **20 tiles wide × 15 tiles tall**, so at 16 px × 3 scale the game screen is 960 × 720 px. Coordinates are written as `(x, y)`, counting from `(0, 0)` at the top-left.
 
@@ -14,13 +14,13 @@ The ASCII layouts are meant to be copied into `src/data/maps/*.js` as they are (
                        └──────┬───────┘
                               │ north gate (fog clears after Shrine 1)
 ┌──────────────┐       ┌──────┴───────┐       ┌──────────────┐
-│ Ashen Spire  ├───────┤  Lanternhold ├───────┤   Mosswood   │  Zone 1 · Lv 1–3
+│ Ashen Spire  ├───────┤  Candlebrook ├───────┤   Mosswood   │  Zone 1 · Lv 1–3
 │   Floor 1    │ west  │   Village    │ east  │              │
 └──────┬───────┘ gate  └──────────────┘ open  └──────────────┘
        │ stairs  (fog clears after Shrine 2)
 ┌──────┴───────┐
 │ Ashen Spire  │  Zone 3 · Lv 7–10
-│   Floor 2    │  Hollow King + Shrine 3
+│   Floor 2    │  Lightless King + Shrine 3
 └──────────────┘
 ```
 
@@ -55,15 +55,15 @@ The ASCII layouts are meant to be copied into `src/data/maps/*.js` as they are (
 | `b` `r` | Cave Bat, Stone Beetle | No, bump into it to fight |
 | `z` `k` | Shade, Ash Knight | No, bump into it to fight |
 | `M` | Mini-boss guarding the shrine | No, bump into it to fight |
-| `K` | The Hollow King | No, bump into it to fight |
+| `K` | The Lightless King | No, bump into it to fight |
 
-**Enemy respawns:** regular enemies come back when you leave a map and return, so you can grind for XP. Mini-bosses and the Hollow King stay defeated for good, which is tracked in `world.defeatedBosses`.
+**Enemy respawns:** regular enemies come back when you leave a map and return, so you can grind for XP. Mini-bosses and the Lightless King stay defeated for good, which is tracked in `world.defeatedBosses`.
 
 ---
 
 ## 3. Maps
 
-### Village: Lanternhold (`village`)
+### Village: Candlebrook (`village`)
 
 ```
 #########22#########
@@ -189,7 +189,7 @@ The ASCII layouts are meant to be copied into `src/data/maps/*.js` as they are (
 
 - This floor is the open throne room. You arrive by the **stairs down** `D` (10, 13).
 - **1 Shade** `z` is in the middle of the room.
-- **The Hollow King** `K` (10, 2) blocks the only way to **Shrine 3** `S` at (10, 1). Walking into him starts his 2-phase fight. Once you win, step onto his tile and relight the shrine to roll the credits.
+- **The Lightless King** `K` (10, 2) blocks the only way to **Shrine 3** `S` at (10, 1). Walking into him starts his 2-phase fight. Once you win, step onto his tile and relight the shrine to roll the credits.
 - Before the fight there's a confirmation: *"The air grows cold. Continue?"* That gives the player one last chance to heal or turn back.
 
 ---
