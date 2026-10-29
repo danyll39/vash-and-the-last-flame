@@ -56,5 +56,7 @@ export function parseMap(map) {
     tiles,
     objects,
     start,
+    warps: map.warps ?? {},
+    chests: map.chests ?? {},
   }
 }

@@ -1,6 +1,7 @@
 import TitleScreen from './components/ui/TitleScreen.jsx'
 import WorldScreen from './components/world/WorldScreen.jsx'
-import { GameProvider, useGame } from './state/GameContext.jsx'
+import GameProvider from './state/GameProvider.jsx'
+import { useGame } from './state/useGame.js'
 
 function Screens() {
   const { state, dispatch } = useGame()

@@ -1,10 +1,10 @@
 import { memo } from 'react'
-import { objectSprite, tileLayers } from '../../data/tilesets.js'
+import { tileLayers } from '../../data/tilesets.js'
 import Sprite from './Sprite.jsx'
 import styles from './World.module.css'
 
-// The map never changes while you walk, so this only re-renders when
-// the map itself changes.
+// The terrain never changes while you walk, so this only re-renders when
+// the map itself changes. NPCs, chests and enemies are drawn by MapObjects.
 function TileMap({ map }) {
   const cells = []
   for (let y = 0; y < map.height; y++) {
@@ -24,24 +24,9 @@ function TileMap({ map }) {
   }
 
   return (
-    <>
-      <div className={styles.grid} data-testid="tile-grid">
-        {cells}
-      </div>
-      {map.objects.map((obj) => {
-        const sprite = objectSprite(obj)
-        if (!sprite) return null
-        return (
-          <div
-            key={`${obj.type}-${obj.x},${obj.y}`}
-            className={styles.entity}
-            style={{ '--x': obj.x, '--y': obj.y }}
-          >
-            <Sprite name={sprite} />
-          </div>
-        )
-      })}
-    </>
+    <div className={styles.grid} data-testid="tile-grid">
+      {cells}
+    </div>
   )
 }
 

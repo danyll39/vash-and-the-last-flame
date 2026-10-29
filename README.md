@@ -2,7 +2,7 @@
 
 A small, finishable, turn-based fantasy RPG built with React and Vite. This is a portfolio piece by Ursala Lindsey.
 
-> **Status:** M1 done. You can walk around Candlebrook, and walls, water, houses, fog and NPCs block you. Next up is M2 (warps, NPCs, dialogue). Work through the milestones below in order and check off each item as you finish it.
+> **Status:** M2 done. The opening scene plays, you can talk to NPCs, open chests, and walk between Candlebrook and Mosswood, with a HUD on top. Next up is M3 (turn-based combat). Work through the milestones below in order and check off each item as you finish it.
 
 ## Getting started
 
@@ -155,7 +155,9 @@ lanternhold-rpg/
 │   ├── main.jsx
 │   ├── App.jsx             # switches screens: title | world | battle | gameover | credits
 │   ├── state/
-│   │   ├── GameContext.jsx
+│   │   ├── gameContext.js  # the context object only, so fast refresh works
+│   │   ├── GameProvider.jsx
+│   │   ├── useGame.js
 │   │   ├── gameReducer.js  # all state changes live here
 │   │   └── save.js         # localStorage save/load
 │   ├── logic/              # pure functions, unit-tested
@@ -183,13 +185,13 @@ lanternhold-rpg/
 {
   screen: 'title',            // 'title' | 'world' | 'battle' | 'gameover' | 'credits'
   player: { name, level, xp, hp, maxHp, light, maxLight, atk, def, gold,
-            weapon, armor, inventory: [] },
+            weapon, armor, inventory: {} },   // { herb: 3 }, stacks up to 9
   world:  { mapId: 'village', x: 5, y: 7, facing: 'down',
             defeatedEnemies: [],   // cleared when you change maps, so regular enemies respawn
             defeatedBosses: [], openedChests: [], flags: {} },
   battle: null,               // { enemies: [...], log: [], turn: 'player' } while fighting
   quests: { [questId]: { status, progress } },
-  dialogue: null,             // { lines: [...], index } while talking
+  dialogue: null,             // { boxes: [{ speaker?, text }], index, then } while talking
 }
 ```
 
@@ -216,10 +218,10 @@ Each milestone should leave you with something runnable. Commit at the end of ea
 
 ### M2: Maps, warps, NPCs, and dialogue (2 days)
 - [x] `parseMap` turns map letters into objects (done in M1)
-- [ ] Warp tiles move you between the village and Mosswood
-- [ ] NPC tiles and an `INTERACT` action show a `DialogueBox` (Space advances, and movement is locked while it's open)
-- [ ] Chests give an item once (tracked in `openedChests`)
-- [ ] A HUD shows HP, Light, gold, and level
+- [x] Warp tiles move you between the village and Mosswood
+- [x] NPC tiles and an `INTERACT` action show a `DialogueBox` (Space advances, and movement is locked while it's open). The opening scene and the lantern hints use it too.
+- [x] Chests give an item once (tracked in `openedChests`). A full stack sells the extra, as ITEMS.md describes.
+- [x] A HUD shows HP, Light, gold, and level
 - **Done when:** you can talk to Old Wick, walk into the forest, and open a chest.
 
 ### M3: Turn-based combat (3 days, the core of the game)

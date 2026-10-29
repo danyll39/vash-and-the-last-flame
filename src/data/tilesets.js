@@ -13,6 +13,7 @@ export const SPRITES = {
   grassFlowers: ['town', 2],
   dirt: ['town', 25],
   tree: ['town', 28],
+  treeTall: ['town', 16],
   stone: ['dungeon', 40],
   roofLeft: ['town', 52],
   roofMid: ['town', 53],
@@ -21,6 +22,11 @@ export const SPRITES = {
   wallDoor: ['town', 85],
   lantern: ['town', 93],
   chest: ['dungeon', 89],
+  chestOpen: ['dungeon', 91],
+  shrine: ['dungeon', 65],
+  mossSlime: ['dungeon', 108],
+  thornWolf: ['dungeon', 124],
+  thornbackBoar: ['dungeon', 123],
   wick: ['dungeon', 84],
   bren: ['dungeon', 86],
   tamsin: ['dungeon', 99],
@@ -29,10 +35,17 @@ export const SPRITES = {
 
 const NPC_SPRITES = { wick: 'wick', bren: 'bren', tamsin: 'tamsin' }
 
-export function objectSprite(obj) {
+// Mini-bosses are per map, so the map's id picks the sprite.
+const MINI_BOSS_SPRITES = { mosswood: 'thornbackBoar' }
+
+// Enemies from later zones have no sprite yet and are skipped (M7).
+export function objectSprite(obj, { mapId, opened = false } = {}) {
   if (obj.type === 'npc') return NPC_SPRITES[obj.npcId]
-  if (obj.type === 'chest') return 'chest'
+  if (obj.type === 'chest') return opened ? 'chestOpen' : 'chest'
   if (obj.type === 'lantern') return 'lantern'
+  if (obj.type === 'shrine') return 'shrine'
+  if (obj.type === 'enemy') return SPRITES[obj.enemyId] ? obj.enemyId : null
+  if (obj.type === 'miniBoss') return MINI_BOSS_SPRITES[mapId] ?? null
   return null
 }
 
@@ -57,7 +70,8 @@ function houseAt(tiles, x, y) {
 }
 
 // Returns the layers for one cell, bottom first. Strings are sprite
-// names; { css } entries are drawn with CSS instead (water, fog).
+// names; { css } entries are drawn with CSS instead (neither Kenney
+// pack has water, fog or a bridge).
 export function tileLayers(map, x, y) {
   const ch = map.tiles[y][x]
   const ground = grassAt(x, y)
@@ -66,12 +80,16 @@ export function tileLayers(map, x, y) {
 
   switch (ch) {
     case '#':
-      // Trees around the edge; low stone walls inside (like the lantern plinth).
-      return onEdge ? [ground, 'tree'] : [ground, 'stone']
+      // Town: trees around the edge, low stone walls inside (the lantern
+      // plinth). Forest: trees everywhere, taller ones inside.
+      if (onEdge) return [ground, 'tree']
+      return [ground, map.tileset === 'forest' ? 'treeTall' : 'stone']
     case 'H':
       return [ground, houseAt(map.tiles, x, y)]
     case '~':
       return [{ css: 'water' }]
+    case '=':
+      return [{ css: 'water' }, { css: 'bridge' }]
     case 'f':
       return [ground, { css: 'fog' }]
     case '1':
