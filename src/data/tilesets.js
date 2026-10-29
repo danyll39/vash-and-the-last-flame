@@ -27,6 +27,11 @@ export const SPRITES = {
   mossSlime: ['dungeon', 108],
   thornWolf: ['dungeon', 124],
   thornbackBoar: ['dungeon', 123],
+  caveBat: ['dungeon', 120],
+  shade: ['dungeon', 121],
+  paleCrawler: ['dungeon', 122],
+  ashKnight: ['dungeon', 96],
+  // No beetle in the pack yet; the battle screen draws a placeholder.
   wick: ['dungeon', 84],
   bren: ['dungeon', 86],
   tamsin: ['dungeon', 99],

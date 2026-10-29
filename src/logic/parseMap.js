@@ -58,5 +58,6 @@ export function parseMap(map) {
     start,
     warps: map.warps ?? {},
     chests: map.chests ?? {},
+    boss: map.boss ?? null,
   }
 }

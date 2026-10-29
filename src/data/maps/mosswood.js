@@ -28,4 +28,6 @@ export default {
     '2,5': { items: [{ item: 'wickOil', qty: 2 }] },
     '16,12': { items: [{ item: 'tonic', qty: 1 }] },
   },
+  // The `M` on this map.
+  boss: { enemyId: 'thornbackBoar' },
 }

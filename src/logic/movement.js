@@ -13,13 +13,20 @@ export function isWalkableTile(ch) {
   return WALKABLE.has(ch)
 }
 
-export function objectAt(map, x, y) {
-  return map.objects.find((obj) => obj.x === x && obj.y === y) ?? null
+const nothingGone = () => false
+
+// `isGone(obj)` lets the caller skip objects that have been removed,
+// such as defeated enemies.
+export function objectAt(map, x, y, isGone = nothingGone) {
+  return (
+    map.objects.find((obj) => obj.x === x && obj.y === y && !isGone(obj)) ??
+    null
+  )
 }
 
-export function canMoveTo(map, x, y) {
+export function canMoveTo(map, x, y, isGone = nothingGone) {
   if (x < 0 || y < 0 || x >= map.width || y >= map.height) return false
   if (!isWalkableTile(map.tiles[y][x])) return false
   // NPCs, chests, the lantern and enemies all stand in the way.
-  return objectAt(map, x, y) === null
+  return objectAt(map, x, y, isGone) === null
 }

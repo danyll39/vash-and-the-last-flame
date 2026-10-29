@@ -2,14 +2,17 @@ import { LANTERN_DIALOGUE, NPC_DIALOGUE, NPC_NAMES } from '../data/dialogue.js'
 import { itemLabel } from '../data/items.js'
 import { MAPS } from '../data/maps/index.js'
 import { SCENES } from '../data/scenes.js'
+import { startBattle, takeTurn } from '../logic/combat.js'
 import { linesToBoxes, openDialogue, pickDialogue } from '../logic/dialogue.js'
 import { addItem } from '../logic/inventory.js'
 import { DIRECTIONS, canMoveTo, objectAt } from '../logic/movement.js'
+import { createRng } from '../logic/random.js'
+import { isObjectGone, objectKey } from '../logic/world.js'
 
 export function createInitialState() {
   const start = MAPS.village.start
   return {
-    screen: 'title', // 'title' | 'world' (later: 'battle' | 'gameover' | 'credits')
+    screen: 'title', // 'title' | 'world' | 'battle' (later: 'credits')
     // Level 1 stats from ENEMIES.md, section 1. Starting kit from ITEMS.md.
     player: {
       name: 'Vash',
@@ -33,33 +36,60 @@ export function createInitialState() {
       facing: 'down',
       flags: {},
       openedChests: [],
+      defeatedEnemies: [], // cleared on every warp, so enemies respawn
+      defeatedBosses: [],
     },
     dialogue: null, // { boxes: [{ speaker?, text }], index, then } while talking
+    battle: null, // see logic/combat.js startBattle()
   }
 }
 
-export function chestKey(mapId, x, y) {
-  return `${mapId}:${x},${y}`
-}
+const goneChecker = (world, map) => (obj) => isObjectGone(world, map, obj)
 
-function move(state, dir) {
+function move(state, dir, seed) {
   const step = DIRECTIONS[dir]
   const { world } = state
   const map = MAPS[world.mapId]
   const x = world.x + step.dx
   const y = world.y + step.dy
+  const isGone = goneChecker(world, map)
 
-  // Turn to face the direction even when the move is blocked.
-  if (!canMoveTo(map, x, y)) {
+  if (!canMoveTo(map, x, y, isGone)) {
+    // Bumping into an enemy starts a fight.
+    const target = objectAt(map, x, y, isGone)
+    const enemyId =
+      target?.type === 'enemy'
+        ? target.enemyId
+        : target?.type === 'miniBoss'
+          ? map.boss?.enemyId
+          : null
+    if (enemyId) {
+      const source = { type: target.type, key: objectKey(map.id, x, y) }
+      return {
+        ...state,
+        screen: 'battle',
+        world: { ...world, facing: dir },
+        battle: startBattle(enemyId, createRng(seed), source),
+      }
+    }
+    // Otherwise just turn to face it.
     return { ...state, world: { ...world, facing: dir } }
   }
 
-  // Stepping onto a warp tile moves you to the linked map.
+  // Stepping onto a warp tile moves you to the linked map. Regular
+  // enemies respawn whenever you change maps.
   const warp = map.warps[map.tiles[y][x]]
   if (warp && MAPS[warp.to]) {
     return {
       ...state,
-      world: { ...world, mapId: warp.to, x: warp.x, y: warp.y, facing: dir },
+      world: {
+        ...world,
+        mapId: warp.to,
+        x: warp.x,
+        y: warp.y,
+        facing: dir,
+        defeatedEnemies: [],
+      },
     }
   }
 
@@ -87,7 +117,7 @@ function advanceDialogue(state) {
 }
 
 function openChest(state, map, chest) {
-  const key = chestKey(map.id, chest.x, chest.y)
+  const key = objectKey(map.id, chest.x, chest.y)
   if (state.world.openedChests.includes(key)) {
     return {
       ...state,
@@ -126,7 +156,12 @@ function interact(state) {
   const { world } = state
   const map = MAPS[world.mapId]
   const step = DIRECTIONS[world.facing]
-  const target = objectAt(map, world.x + step.dx, world.y + step.dy)
+  const target = objectAt(
+    map,
+    world.x + step.dx,
+    world.y + step.dy,
+    goneChecker(world, map),
+  )
   if (!target) return state
 
   if (target.type === 'npc') {
@@ -143,8 +178,64 @@ function interact(state) {
     return { ...state, dialogue: openDialogue(linesToBoxes(entry.lines)) }
   }
 
-  // Enemies, shrines and bosses come alive in M3 and M7.
+  // Shrines come alive in M7. Enemies are fought by walking into them.
   return state
+}
+
+function endBattle(state) {
+  const { battle, player, world } = state
+  const back = { ...state, screen: 'world', battle: null }
+
+  if (battle.phase === 'won') {
+    const { xp, gold } = battle.rewards
+    const defeated =
+      battle.source?.type === 'miniBoss'
+        ? {
+            defeatedBosses: [
+              ...world.defeatedBosses,
+              battle.enemies[0].enemyId,
+            ],
+          }
+        : battle.source
+          ? { defeatedEnemies: [...world.defeatedEnemies, battle.source.key] }
+          : {}
+    return {
+      ...back,
+      // Leveling up from XP arrives in M4.
+      player: { ...player, xp: player.xp + xp, gold: player.gold + gold },
+      world: { ...world, ...defeated },
+    }
+  }
+
+  if (battle.phase === 'lost') {
+    // STORY.md: wake up in the village, fully healed, half your gold gone.
+    const start = MAPS.village.start
+    return {
+      ...back,
+      player: {
+        ...player,
+        hp: player.maxHp,
+        light: player.maxLight,
+        gold: Math.floor(player.gold / 2),
+      },
+      world: {
+        ...world,
+        mapId: 'village',
+        x: start.x,
+        y: start.y,
+        facing: 'down',
+        defeatedEnemies: [],
+      },
+      dialogue: openDialogue([
+        {
+          text: 'You wake up in the village. Wick is frowning. Half your gold is gone.',
+        },
+      ]),
+    }
+  }
+
+  // Fled: back where you were, and the enemy is still there.
+  return back
 }
 
 export function gameReducer(state, action) {
@@ -165,11 +256,29 @@ export function gameReducer(state, action) {
       // Movement is locked while a dialogue box is open.
       if (state.screen !== 'world' || state.dialogue) return state
       if (!DIRECTIONS[action.dir]) return state
-      return move(state, action.dir)
+      return move(state, action.dir, action.seed)
 
     case 'INTERACT':
       if (state.screen !== 'world') return state
       return interact(state)
+
+    case 'BATTLE_CHOICE': {
+      if (state.screen !== 'battle' || !state.battle) return state
+      const { battle, player } = takeTurn(
+        state.battle,
+        state.player,
+        action.choice,
+        createRng(action.seed),
+        state.world.flags,
+      )
+      return { ...state, battle, player }
+    }
+
+    case 'END_BATTLE':
+      if (state.screen !== 'battle' || state.battle?.phase === 'choose') {
+        return state
+      }
+      return endBattle(state)
 
     default:
       return state

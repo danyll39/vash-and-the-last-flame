@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { MAPS } from '../../data/maps/index.js'
 import { useKeyboard } from '../../hooks/useKeyboard.js'
+import { newSeed } from '../../logic/random.js'
 import { useGame } from '../../state/useGame.js'
 import Hud from '../ui/Hud.jsx'
 import DialogueBox from './DialogueBox.jsx'
@@ -14,8 +15,9 @@ function WorldScreen() {
   const { world, player, dialogue } = state
   const map = MAPS[world.mapId]
 
+  // The seed decides group size if this step bumps into an enemy.
   const onMove = useCallback(
-    (dir) => dispatch({ type: 'MOVE', dir }),
+    (dir) => dispatch({ type: 'MOVE', dir, seed: newSeed() }),
     [dispatch],
   )
   const onInteract = useCallback(
@@ -39,7 +41,7 @@ function WorldScreen() {
         style={{ '--map-w': map.width, '--map-h': map.height }}
       >
         <TileMap map={map} />
-        <MapObjects map={map} openedChests={world.openedChests} />
+        <MapObjects map={map} world={world} />
         {/* Keyed by map so a warp doesn't animate across the screen. */}
         <Player
           key={world.mapId}

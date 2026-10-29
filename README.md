@@ -2,7 +2,7 @@
 
 A small, finishable, turn-based fantasy RPG built with React and Vite. This is a portfolio piece by Ursala Lindsey.
 
-> **Status:** M2 done. The opening scene plays, you can talk to NPCs, open chests, and walk between Candlebrook and Mosswood, with a HUD on top. Next up is M3 (turn-based combat). Work through the milestones below in order and check off each item as you finish it.
+> **Status:** M3 done. Walking into an enemy starts a turn-based battle with Attack, Skills, Items and Flee. Winning pays XP and gold, and losing wakes you in the village. Next up is M4 (leveling). Work through the milestones below in order and check off each item as you finish it.
 
 ## Getting started
 
@@ -225,10 +225,11 @@ Each milestone should leave you with something runnable. Commit at the end of ea
 - **Done when:** you can talk to Old Wick, walk into the forest, and open a chest.
 
 ### M3: Turn-based combat (3 days, the core of the game)
-- [ ] Enemies placed on the map; bumping into one starts a battle (`screen: 'battle'`)
-- [ ] `combat.js`: `calcDamage`, `enemyTurn`, `isBattleOver` (unit-tested)
-- [ ] `ActionMenu` (Attack, Skill, Item, Flee), a `CombatLog`, and animated HP bars
-- [ ] Winning removes the enemy from the map. Losing goes to the game-over screen, then back to the village
+- [x] Enemies placed on the map; bumping into one starts a battle (`screen: 'battle'`)
+- [x] `combat.js`: `calcDamage`, `startBattle`, and `takeTurn` (the player acts, then every enemy acts, then it checks for a win or loss). All 8 special moves from ENEMIES.md work and are unit-tested.
+- [x] `ActionMenu` (Attack, Skill, Item, Flee), a `CombatLog`, and animated HP bars. ←/→ picks the target.
+- [x] Winning removes the enemy from the map (it respawns after a warp; mini-bosses stay gone). Losing shows "Everything goes dark…" on the battle screen, then wakes you in the village. This replaced a separate game-over screen.
+- Notes: dice rolls use a seeded random generator (`logic/random.js`), so the reducer gives the same result every time it runs. The result button waits 600 ms before it accepts input, so mashing Enter can't skip the victory or defeat message. XP is collected, but levels come in M4, and item drops in M5.
 - **Done when:** you can fight and beat a Mosswood slime, and you can lose to one.
 
 ### M4: XP and leveling (1 day)
