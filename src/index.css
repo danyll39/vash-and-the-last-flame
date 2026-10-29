@@ -1,0 +1,55 @@
+:root {
+  --night: #0e0b1a;
+  --night-soft: #1c1630;
+  --ink: #f3ead7;
+  --ink-dim: #a99f8c;
+  --glow: #ffcf5a;
+  --glow-hot: #fff4c2;
+  --brass: #8a6a3f;
+  --focus: #7fd3ff;
+
+  --font-pixel: 'Press Start 2P', ui-monospace, monospace;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--night);
+  color: var(--ink);
+  font-family: var(--font-pixel);
+  -webkit-font-smoothing: none;
+}
+
+button {
+  font: inherit;
+}
+
+/* Temporary screen shown after Start until the world map exists (M1). */
+.placeholder {
+  min-height: 100%;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 24px;
+  padding: 16px;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}

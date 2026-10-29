@@ -2,7 +2,18 @@
 
 A small, finishable, turn-based fantasy RPG built with React and Vite. This is a portfolio piece by Ursala Lindsey.
 
-> **Status:** Planning. No code yet. Work through the milestones below in order and check off each item as you finish it.
+> **Status:** M0 done. The project is set up and has a title screen. Next up is M1 (tile map and movement). Work through the milestones below in order and check off each item as you finish it.
+
+## Getting started
+
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm test           # Vitest in watch mode (npx vitest run for a single run)
+npm run lint       # oxlint
+npm run format     # Prettier
+npm run build      # production build in dist/
+```
 
 ---
 
@@ -124,7 +135,7 @@ A quest is a data object `{ id, title, giver, status: 'locked'|'active'|'done', 
 
 | Concern | Choice | Why |
 |---|---|---|
-| Framework | **React 18 + Vite** | Fast dev server with hot reload, and a simple static build |
+| Framework | **React 19 + Vite 8** | Fast dev server with hot reload, and a simple static build |
 | Game state | **`useReducer` + Context** | Fits a turn-based game: every action is a dispatched event, and the state is easy to save as JSON |
 | Map rendering | **CSS Grid of tile `<div>`s** using sprite-sheet `background-position` | No canvas or game engine needed. A 20×15 grid is only 300 nodes, which is fine |
 | Maps | 2D arrays in JS modules (`src/data/maps/*.js`) | Simple to start. Optionally switch to the [Tiled](https://www.mapeditor.org/) editor later and import its JSON |
@@ -189,10 +200,10 @@ lanternhold-rpg/
 Each milestone should leave you with something runnable. Commit at the end of each one. Times are rough estimates for part-time work.
 
 ### M0: Project setup (½ day)
-- [ ] `npm create vite@latest lanternhold-rpg -- --template react`
-- [ ] Add Vitest, ESLint, and Prettier
-- [ ] Download Kenney *Tiny Dungeon* and *Tiny Town* into `public/assets/`, keeping the license files
-- [ ] Create a GitHub repo, then push
+- [x] `npm create vite@latest lanternhold-rpg -- --template react`
+- [x] Add Vitest (with Testing Library and jsdom), oxlint (the template's linter, used instead of ESLint), and Prettier
+- [ ] Download Kenney *Tiny Dungeon* and *Tiny Town* into `public/assets/`, keeping the license files (needed from M1 on)
+- [x] Create a GitHub repo, then push
 - **Done when:** `npm run dev` shows a "Lanternhold" title screen with a Start button.
 
 ### M1: Tile map and movement (1–2 days)
